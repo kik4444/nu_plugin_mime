@@ -16,4 +16,8 @@ impl Plugin for Mime {
             Box::new(MimeGuess),
         ]
     }
+
+    fn version(&self) -> String {
+        env!("CARGO_PKG_VERSION").into()
+    }
 }
