@@ -1,7 +1,9 @@
+use std::sync::{atomic::AtomicBool, Arc};
+
 use nu_plugin::PluginCommand;
 use nu_protocol::{
     record, Category, Example, IntoInterruptiblePipelineData, IntoPipelineData, PipelineData,
-    ShellError, Signature, Span, Type, Value,
+    ShellError, Signals, Signature, Span, Type, Value,
 };
 
 use crate::Mime;
@@ -131,8 +133,7 @@ impl PluginCommand for MimeGuess {
                     }
                 });
 
-                // The plugin engine should handle ctrlc automatically
-                let ctrlc = None;
+                let ctrlc = Signals::new(Arc::new(AtomicBool::new(false)));
 
                 Ok(mime_records_iter.into_pipeline_data(call.head, ctrlc))
             }
