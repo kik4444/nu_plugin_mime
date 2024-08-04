@@ -103,12 +103,16 @@ impl PluginCommand for MimeGuess {
             |input| mime_guess::from_path(input)
         };
 
+        let guess = move |val: &str| {
+            guess_function(val)
+                .first()
+                .map(|mime| mime.to_string())
+                .unwrap_or_else(|| "unknown".to_string())
+        };
+
         match input {
             PipelineData::Value(Value::String { val, internal_span }, ..) => {
-                let mime_type = guess_function(&val)
-                    .first()
-                    .map(|mime| mime.to_string())
-                    .unwrap_or_else(|| "unknown".to_string());
+                let mime_type = guess(&val);
 
                 Ok(Value::string(mime_type, internal_span).into_pipeline_data())
             }
@@ -119,13 +123,7 @@ impl PluginCommand for MimeGuess {
                     match value.as_str() {
                         Ok(s) => {
                             let name = Value::string(s, span);
-                            let mime_type = Value::string(
-                                guess_function(s)
-                                    .first()
-                                    .map(|mime| mime.to_string())
-                                    .unwrap_or_else(|| "unknown".to_string()),
-                                span,
-                            );
+                            let mime_type = Value::string(guess(s), span);
 
                             Value::record(record!("name" => name, "type" => mime_type), span)
                         }
@@ -133,7 +131,7 @@ impl PluginCommand for MimeGuess {
                     }
                 });
 
-                let ctrlc = Signals::new(Arc::new(AtomicBool::new(false)));
+                let ctrlc = Signals::new(Arc::new(AtomicBool::default()));
 
                 Ok(mime_records_iter.into_pipeline_data(call.head, ctrlc))
             }
