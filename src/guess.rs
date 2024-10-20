@@ -37,11 +37,11 @@ impl PluginCommand for MimeGuess {
             .category(Category::Strings)
     }
 
-    fn usage(&self) -> &str {
+    fn description(&self) -> &str {
         "Guess the MIME/Media Type of an extension or path. No disk access is performed."
     }
 
-    fn extra_usage(&self) -> &str {
+    fn extra_description(&self) -> &str {
         r#"Because no disk access is performed, inputs that have no extensions, such as directory names, will return "unknown"."#
     }
 

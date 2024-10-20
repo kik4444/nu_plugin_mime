@@ -25,7 +25,7 @@ If <main type> is "*" all known extensions are returned."#,
             .category(Category::Strings)
     }
 
-    fn usage(&self) -> &str {
+    fn description(&self) -> &str {
         "Get a list of known extensions for a MIME type string."
     }
 
