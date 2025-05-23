@@ -1,21 +1,21 @@
 [package]
-authors = ["kik4444"]
+authors     = ["kik4444"]
 description = "A simple plugin for working with mime types without performing disk access"
-repository = "https://github.com/kik4444/nu_plugin_mime"
-edition = "2021"
-license = "MIT"
-name = "nu_plugin_mime"
-version = "0.103.0"
+repository  = "https://github.com/kik4444/nu_plugin_mime"
+edition     = "2021"
+license     = "MIT"
+name        = "nu_plugin_mime"
+version     = "0.104.0"
 
 [lib]
 doctest = false
-bench = false
+bench   = false
 
 [[bin]]
-name = "nu_plugin_mime"
+name  = "nu_plugin_mime"
 bench = false
 
 [dependencies]
-mime_guess = "2.0.5"
-nu-plugin = { version = "0.103.0" }
-nu-protocol = { version = "0.103.0" }
+mime_guess  = "2.0.5"
+nu-plugin   = "0.104.0"
+nu-protocol = "0.104.0"
