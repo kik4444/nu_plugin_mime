@@ -29,7 +29,7 @@ If <main type> is "*" all known extensions are returned."#,
         "Get a list of known extensions for a MIME type string."
     }
 
-    fn examples(&self) -> Vec<Example> {
+    fn examples(&self) -> Vec<Example<'_>> {
         vec![
             Example {
                 example: r#"mime list "video/x-matroska""#,

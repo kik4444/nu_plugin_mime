@@ -5,7 +5,7 @@ repository  = "https://github.com/kik4444/nu_plugin_mime"
 edition     = "2021"
 license     = "MIT"
 name        = "nu_plugin_mime"
-version     = "0.106.1"
+version     = "0.108.0"
 
 [lib]
 doctest = false
@@ -17,5 +17,5 @@ bench = false
 
 [dependencies]
 mime_guess  = "2.0.5"
-nu-plugin   = "0.106.1"
-nu-protocol = "0.106.1"
+nu-plugin   = "0.108.0"
+nu-protocol = "0.108.0"

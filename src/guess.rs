@@ -45,7 +45,7 @@ impl PluginCommand for MimeGuess {
         r#"Because no disk access is performed, inputs that have no extensions, such as directory names, will return "unknown"."#
     }
 
-    fn examples(&self) -> Vec<Example> {
+    fn examples(&self) -> Vec<Example<'_>> {
         vec![
             Example {
                 example: r#""video.mkv" | mime guess"#,
@@ -111,7 +111,7 @@ impl PluginCommand for MimeGuess {
         };
 
         match input {
-            PipelineData::Value(Value::String { val, internal_span }, ..) => {
+            PipelineData::Value(Value::String { val, internal_span, .. }, ..) => {
                 let mime_type = guess(&val);
 
                 Ok(Value::string(mime_type, internal_span).into_pipeline_data())
